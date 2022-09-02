@@ -1,7 +1,8 @@
 import express, { Request, Response } from 'express'
 import { PrismaClient } from '@prisma/client'
+import userController from './controllers/userController'
 
-const { addUser } = require('./controllers/userController.ts')
+// const { addUser } = require('./controllers/userController.ts')
 
 const app = express()
 app.use(express.json())
@@ -19,7 +20,7 @@ const prisma = new PrismaClient()
 //     return res.status(200).json(user)
 // })
 
-app.post('/addUser', addUser)
+app.post('/addUser', userController.addUser)
 
 app.post('/manyUsers', async (req: Request, res: Response) => {
     const { userList } = req.body
@@ -97,3 +98,5 @@ app.delete('/:id', async (req: Request, res: Response) => {
 app.listen(3031, () => {
     console.log('Server running on port 3030')
 })
+
+export default app
