@@ -1,5 +1,5 @@
 import { describe, it, beforeEach, afterEach } from 'mocha'
-import { expect } from 'chai'
+import { assert, expect } from 'chai'
 import rewire from 'rewire'
 import request from 'supertest'
 import sinon from 'sinon'
@@ -24,8 +24,14 @@ describe('Testing routes from express', () => {
       sandbox.stub(userController, 'addUser').resolves(mock)
     })
 
+    it('should create a new user and return item', () => {
+      request(app).post('/addUser')
+      .send(mock)
+      .expect(201)
+      .end((err, response) => {
+        expect(response.body).to.have.property('username').to.equal('joao pedro')
+      })
+    })
+
   })
-
-  
-
 })
