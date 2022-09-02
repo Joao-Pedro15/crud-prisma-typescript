@@ -1,0 +1,32 @@
+{
+    "data":[
+    {
+        "id":2,
+        "username":"joaozin",
+        "password":"senhadojoazin",
+        "Car":[
+                {
+                    "id":1,"modelType":"Renault",
+                    "year":2002,
+                    "userId":2
+                },
+                {
+                    "id":2,
+                    "modelType":"Ferrari",
+                    "year":2010,"userId":2
+                }
+            ]
+        },
+        {
+            "id":3,
+            "username":"Pedro",
+            "password":"senhadois",
+            "Car":[]
+        },
+        {
+            "id":4,"username":"Pedro Correa",
+            "password":"senhadois",
+            "Car":[]
+        }
+    ]
+}
