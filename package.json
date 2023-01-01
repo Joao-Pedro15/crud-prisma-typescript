@@ -5,8 +5,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.ts",
-    "test": "mocha --check-leaks -r tsconfig-paths/register -r ts-node/register *.test.ts --exit"
+    "dev": "ts-node-dev --exit-child --transpile-only --ignore-watch node_modules --respawn index.ts",
+    "test": "mocha --check-leaks -r tsconfig-paths/register -r ts-node/register *.test.ts --exit",
+    "build": "tsc",
+    "postinstall": "npx prisma generate"
   },
   "author": "",
   "license": "ISC",
