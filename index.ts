@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express'
+import express, { Request, response, Response } from 'express'
 import { PrismaClient } from '@prisma/client'
 import userController from './controllers/userController'
 
@@ -8,6 +8,12 @@ const app = express()
 app.use(express.json())
 
 const prisma = new PrismaClient()
+
+app.get('/teste', async (req: Request, res: Response) => {
+    return response.status(200).json({
+        message: 'Api running successfully!'
+    })
+})
 
 // app.post('/addUser', async (req: Request, res: Response) => {
 //     const { username, password } = req.body
