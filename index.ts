@@ -1,4 +1,4 @@
-import express, { Request, response, Response } from 'express'
+import express, { Request, Response } from 'express'
 import { PrismaClient } from '@prisma/client'
 import userController from './controllers/userController'
 
@@ -10,7 +10,7 @@ app.use(express.json())
 const prisma = new PrismaClient()
 
 app.get('/teste', async (req: Request, res: Response) => {
-    return response.status(200).json({
+    return res.status(200).json({
         message: 'Api running successfully!'
     })
 })
@@ -102,7 +102,7 @@ app.delete('/:id', async (req: Request, res: Response) => {
 
 
 app.listen(3031, () => {
-    console.log('Server running on port 3030')
+    console.log('Server running on port 3031')
 })
 
 module.exports =  app
