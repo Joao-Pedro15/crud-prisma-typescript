@@ -1,3 +1,5 @@
+import 'dotenv/config'
+import cors from 'cors'
 import express, { Request, Response } from 'express'
 import { PrismaClient } from '@prisma/client'
 import userController from './controllers/userController'
@@ -6,6 +8,7 @@ import userController from './controllers/userController'
 
 const app = express()
 app.use(express.json())
+app.use(cors())
 
 const prisma = new PrismaClient()
 
@@ -101,8 +104,8 @@ app.delete('/:id', async (req: Request, res: Response) => {
 })
 
 
-app.listen(3031, () => {
-    console.log('Server running on port 3031')
+app.listen(process.env.PORT, () => {
+    console.log(`Server running on port ${process.env.PORT}`)
 })
 
 module.exports =  app
