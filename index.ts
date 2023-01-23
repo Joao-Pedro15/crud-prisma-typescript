@@ -60,6 +60,8 @@ app.post('/addCar', async (req: Request, res: Response) => {
 })
 
 
+app.get('/user/:id', userController.getUser)
+
 app.get('/users', async (req: Request, res: Response) => {
     const users = await prisma.user.findMany({
         include: {Car: true}
