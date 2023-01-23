@@ -8,17 +8,18 @@ export async function authentication(
 ) {
   const authHeader = request.headers.authorization;
 
-  if (!authHeader) return false
+  if (!authHeader) return response.status(401).json({message: 'not found token'})
 
   const [, token] = authHeader.split(" ");
 
   try {
     const verified = verify(token, String(process.env.SECRET))
-    if(!verified) throw new Error('invalid token')
+    if(!verified) return response.status(401).json({ message: 'invalid token' })
+    // if(!verified) throw new Error('invalid token')
 
     // const { sub: userId } = decode(token);
     return next();
   } catch (err:any) {
-    return err.message
+    return response.status(500).json({mesage: err})
   }
 }
