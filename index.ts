@@ -5,8 +5,6 @@ import { PrismaClient } from '@prisma/client'
 import userController from './controllers/userController'
 import { authentication } from './middlewares/auth'
 
-// const { addUser } = require('./controllers/userController.ts')
-
 const app = express()
 app.use(express.json())
 app.use(cors())
@@ -21,24 +19,10 @@ app.get('/teste', async (req: Request, res: Response) => {
 
 app.post('/authUser', userController.login)
 
-// app.post('/addUser', async (req: Request, res: Response) => {
-//     const { username, password } = req.body
-//     const user = await prisma.user.create({
-//         data: {
-//             username,
-//             password
-//         },
-//     })
-//     return res.status(200).json(user)
-// })
-
 app.post('/addUser', userController.addUser)
 
 app.post('/manyUsers', async (req: Request, res: Response) => {
     const { userList } = req.body
-    // const user = await prisma.user.createMany({
-    //     data: userList
-    // })
     const user = await prisma.user.create({
         data: userList
     })
