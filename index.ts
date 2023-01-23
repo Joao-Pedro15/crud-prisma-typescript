@@ -18,6 +18,8 @@ app.get('/teste', async (req: Request, res: Response) => {
     })
 })
 
+app.post('/authUser', userController.login)
+
 // app.post('/addUser', async (req: Request, res: Response) => {
 //     const { username, password } = req.body
 //     const user = await prisma.user.create({
