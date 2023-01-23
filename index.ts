@@ -3,6 +3,7 @@ import cors from 'cors'
 import express, { Request, Response } from 'express'
 import { PrismaClient } from '@prisma/client'
 import userController from './controllers/userController'
+import { authentication } from './middlewares/auth'
 
 // const { addUser } = require('./controllers/userController.ts')
 
@@ -60,7 +61,7 @@ app.post('/addCar', async (req: Request, res: Response) => {
 })
 
 
-app.get('/user/:id', userController.getUser)
+app.get('/user/:id', authentication, userController.getUser)
 
 app.get('/users', async (req: Request, res: Response) => {
     const users = await prisma.user.findMany({
