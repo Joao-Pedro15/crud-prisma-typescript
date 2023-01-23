@@ -39,6 +39,16 @@ class UserController {
             return response.status(500).json({message: error.message})
         }
     }
+
+    async getUser(request: Request, response: Response) {
+        const id = request.params.id
+        try {
+            const user = await prisma.user.findUnique({ where: { id: Number(id) } })
+            return response.status(200).json(user)
+        } catch (error:any) {
+            return response.status(500).json({message: error.message})
+        }
+    }
 }
 
 export default new UserController()
