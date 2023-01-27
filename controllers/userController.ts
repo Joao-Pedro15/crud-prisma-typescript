@@ -2,6 +2,7 @@ import { Request, Response } from "express"
 import  { PrismaClient } from '@prisma/client'
 import { sign } from "jsonwebtoken"
 import 'dotenv/config'
+import { RedisAdapter } from '../adapters/integration/RedisAdapter'
 const prisma = new PrismaClient()
 
 class UserController {
@@ -31,6 +32,8 @@ class UserController {
             if(!user[0]) return response.status(404).json({message: 'not found user'})
             if(user[0].password !== password) return response.status(401).json('incorrect password')
             const token = sign({}, String(process.env.SECRET), { subject: String(user[0].id) })
+
+            await new RedisAdapter().setRedis(`user-${user[0].id}`, JSON.stringify(user))
 
             return response.status(200).json(token)
             
