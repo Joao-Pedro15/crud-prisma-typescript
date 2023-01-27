@@ -17,7 +17,7 @@ export async function authentication(
     if(!verified) return response.status(401).json({ message: 'invalid token' })
     // if(!verified) throw new Error('invalid token')
 
-    // const { sub: userId } = decode(token);
+    const { sub: userId } = decode(token);
     return next();
   } catch (err:any) {
     return response.status(500).json({mesage: err})
