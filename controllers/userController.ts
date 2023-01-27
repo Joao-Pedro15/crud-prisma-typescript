@@ -45,8 +45,11 @@ class UserController {
 
     async getUser(request: Request, response: Response) {
         const id = request.params.id
+        const { userId } = request
         try {
-            const user = await prisma.user.findUnique({ where: { id: Number(id) } })
+            const userRedis = await new RedisAdapter().getRedis(`user-${userId}`)
+            const user = JSON.parse(userRedis)
+            // const user = await prisma.user.findUnique({ where: { id: Number(id) } })
             return response.status(200).json(user)
         } catch (error:any) {
             return response.status(500).json({message: error.message})
