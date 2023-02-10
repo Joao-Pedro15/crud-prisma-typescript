@@ -7,4 +7,8 @@ export class GetUserUseCase {
     return this.repository.get(query)
   }
 
+  async getById(id: number) {
+    return this.repository.getById(id)
+  }
+
 }
